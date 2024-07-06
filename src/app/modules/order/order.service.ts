@@ -69,25 +69,16 @@ const getAllFromDBById = async (id: String) => {
   const result = await Order.findOne({ _id: id });
   return result;
 };
-const updateFromDBById = async (id: String, data: any) => {
-  const result = await Order.findOneAndUpdate({ _id: id }, data, {
-    new: true,
-  });
-  return result;
-};
+
 const deleteFromDBById = async (id: String) => {
+  console.log(id);
   const result = await Order.findByIdAndDelete(id);
   return result;
 };
-const searchBySearchTerm = async (id: String) => {
-  const result = await Order.find(id);
-  return result;
-};
+
 export const OrderService = {
   insertIntoDB,
   getAllFromDB,
   getAllFromDBById,
-  updateFromDBById,
   deleteFromDBById,
-  searchBySearchTerm,
 };
