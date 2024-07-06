@@ -32,20 +32,21 @@ const insertIntoDB = async (req: Request, res: Response) => {
 
 const getAllFromDB = async (req: Request, res: Response) => {
   try {
-    const searchData = req.query.searchTerm;
+    const email = req.query.email;
 
-    const result = await OrderService.getAllFromDB(searchData);
-    if (!result) {
+    const result = await OrderService.getAllFromDB(email);
+    if (!result.length) {
       res.send({
         success: false,
         message: "Orders not found",
       });
+    } else {
+      res.send({
+        success: true,
+        message: "Orders retrieved successfully",
+        data: result,
+      });
     }
-    res.send({
-      success: true,
-      message: "Orders retrieved successfully",
-      data: result,
-    });
   } catch (error: any) {
     res.status(400).send({
       success: false,

@@ -54,10 +54,10 @@ const insertIntoDB = async (data: IOrder) => {
   return result;
 };
 
-const getAllFromDB = async (searchTerm: any) => {
-  if (searchTerm) {
+const getAllFromDB = async (email: any) => {
+  if (email) {
     const result = Order.find({
-      name: { $regex: searchTerm, $options: "i" },
+      email: email,
     });
     return result;
   }
