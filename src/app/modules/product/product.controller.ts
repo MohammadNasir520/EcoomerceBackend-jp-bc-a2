@@ -30,6 +30,28 @@ const getAllFromDB = async (req: Request, res: Response) => {
     if (!result) {
       res.send({
         success: false,
+        message: "Products not found",
+      });
+    }
+    res.send({
+      success: true,
+      message: "Products retrieved successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).send({
+      success: false,
+      message: error.errors[0].message,
+    });
+  }
+};
+const getAllFromDBById = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  try {
+    const result = await ProductService.getAllFromDBById(id);
+    if (!result) {
+      res.send({
+        success: false,
         message: "Product not found",
       });
     }
@@ -49,4 +71,5 @@ const getAllFromDB = async (req: Request, res: Response) => {
 export const ProductController = {
   insertIntoDB,
   getAllFromDB,
+  getAllFromDBById,
 };
