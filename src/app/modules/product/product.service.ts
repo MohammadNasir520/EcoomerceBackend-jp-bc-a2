@@ -20,9 +20,14 @@ const updateFromDBById = async (id: String, data: Partial<IProduct>) => {
   });
   return result;
 };
+const deleteFromDBById = async (id: String) => {
+  const result = await Product.findByIdAndDelete(id);
+  return result;
+};
 export const ProductService = {
   insertIntoDB,
   getAllFromDB,
   getAllFromDBById,
   updateFromDBById,
+  deleteFromDBById,
 };

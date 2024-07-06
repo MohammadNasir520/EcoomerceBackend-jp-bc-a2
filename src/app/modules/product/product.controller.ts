@@ -90,10 +90,34 @@ const updateFromDBById = async (req: Request, res: Response) => {
     });
   }
 };
+const deleteFromDBById = async (req: Request, res: Response) => {
+  const id = req.params.id;
+
+  try {
+    const result = await ProductService.deleteFromDBById(id);
+    if (!result) {
+      res.send({
+        success: false,
+        message: "Product not found",
+      });
+    }
+    res.send({
+      success: true,
+      message: "Product delete successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).send({
+      success: false,
+      message: error.errors[0].message,
+    });
+  }
+};
 
 export const ProductController = {
   insertIntoDB,
   getAllFromDB,
   getAllFromDBById,
   updateFromDBById,
+  deleteFromDBById,
 };
