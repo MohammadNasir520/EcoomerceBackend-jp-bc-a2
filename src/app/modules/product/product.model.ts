@@ -6,18 +6,15 @@ const { Schema } = mongoose;
 const productSchema = new Schema<IProduct>({
   name: {
     type: String,
-    required: true,
   },
   description: {
     type: String,
-    required: true,
   },
   price: {
     type: Number,
   },
   category: {
     type: String,
-    required: true,
   },
   tags: {
     type: [String],

@@ -3,7 +3,7 @@ export interface IProduct {
   description: string;
   price: number;
   category: string;
-  tags: [string];
+  tags: string[];
   variants: { type: string; value: string }[];
   inventory: {
     quantity: number;
