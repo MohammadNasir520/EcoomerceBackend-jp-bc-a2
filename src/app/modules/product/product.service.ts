@@ -6,6 +6,11 @@ const insertIntoDB = async (data: IProduct) => {
   return result;
 };
 
+const getAllFromDB = async () => {
+  const result = await Product.find();
+  return result;
+};
 export const ProductService = {
   insertIntoDB,
+  getAllFromDB,
 };

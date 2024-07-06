@@ -24,6 +24,29 @@ const insertIntoDB = async (req: Request, res: Response) => {
   }
 };
 
+const getAllFromDB = async (req: Request, res: Response) => {
+  try {
+    const result = await ProductService.getAllFromDB();
+    if (!result) {
+      res.send({
+        success: false,
+        message: "Product not found",
+      });
+    }
+    res.send({
+      success: true,
+      message: "Product retrieved successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).send({
+      success: false,
+      message: error.errors[0].message,
+    });
+  }
+};
+
 export const ProductController = {
   insertIntoDB,
+  getAllFromDB,
 };
