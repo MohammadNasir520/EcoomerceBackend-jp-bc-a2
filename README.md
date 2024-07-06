@@ -43,3 +43,6 @@ delete by id  <br>
  <br>
 search by email <br>
 /api/orders?email=level2@programming-hero.com  [method: get] <br>
+
+# technology 
+Typescript, MongoDB, Mongoose, Node.js, Express.js
