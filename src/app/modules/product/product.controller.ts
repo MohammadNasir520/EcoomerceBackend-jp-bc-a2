@@ -26,7 +26,9 @@ const insertIntoDB = async (req: Request, res: Response) => {
 
 const getAllFromDB = async (req: Request, res: Response) => {
   try {
-    const result = await ProductService.getAllFromDB();
+    const searchData = req.query.searchTerm;
+
+    const result = await ProductService.getAllFromDB(searchData);
     if (!result) {
       res.send({
         success: false,
@@ -95,6 +97,29 @@ const deleteFromDBById = async (req: Request, res: Response) => {
 
   try {
     const result = await ProductService.deleteFromDBById(id);
+    if (!result) {
+      res.send({
+        success: false,
+        message: "Product not found",
+      });
+    }
+    res.send({
+      success: true,
+      message: "Product delete successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).send({
+      success: false,
+      message: error.errors[0].message,
+    });
+  }
+};
+const searchBySearchTerm = async (req: Request, res: Response) => {
+  const id = req.params.id;
+
+  try {
+    const result = await ProductService.searchBySearchTerm(id);
     if (!result) {
       res.send({
         success: false,
