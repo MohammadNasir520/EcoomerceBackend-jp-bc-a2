@@ -73,7 +73,8 @@ const updateFromDBById = async (req: Request, res: Response) => {
   const id = req.params.id;
   const data = req.body;
   try {
-    const result = await ProductService.updateFromDBById(id, data);
+    const zodParsedData = ProductValidation.updateSchema.parse(data);
+    const result = await ProductService.updateFromDBById(id, zodParsedData);
     if (!result) {
       res.send({
         success: false,
@@ -86,8 +87,10 @@ const updateFromDBById = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error: any) {
+    console.log(error);
     res.status(400).send({
       success: false,
+      path: error.errors[0].path[0],
       message: error.errors[0].message,
     });
   }

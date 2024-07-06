@@ -21,7 +21,7 @@ const getAllFromDBById = async (id: String) => {
   const result = await Product.findOne({ _id: id });
   return result;
 };
-const updateFromDBById = async (id: String, data: Partial<IProduct>) => {
+const updateFromDBById = async (id: String, data: any) => {
   const result = await Product.findOneAndUpdate({ _id: id }, data, {
     new: true,
   });
